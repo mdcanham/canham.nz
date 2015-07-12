@@ -1,0 +1,12 @@
+# Bolt specific stuff. Don't put config files, databases or 'vendor' in Git.
+app/cache/*
+app/config/*.yml
+app/database/*
+*config.yml
+files/*
+extensions/*
+thumbs/
+vendor/
+
+# Files related to testing, file-system cruft and temporary files.
+.DS_Store
