@@ -1,0 +1,18 @@
+{
+  "generator-tight": {
+    "name": "Matthew Canham",
+    "shortName": "Canham",
+    "owner": "Canham",
+    "devUrl": "http://localhost/canham.nz",
+    "license": "None",
+    "description": "Matthew Canham's portfolio and blog site",
+    "username": "Matthew Canham",
+    "email": "matt@canham.nz",
+    "repository": "https://canham.nz",
+    "hyphenName": "matthew-canham",
+    "camelName": "t",
+    "upperCamelName": "T",
+    "lowerShortName": "canham",
+    "webroot": ""
+  }
+}

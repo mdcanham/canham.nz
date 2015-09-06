@@ -1,0 +1,68 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "acd45ca7d1119794a3b24b2088216b48",
+    "packages": [
+        {
+            "name": "bolt/sitemap",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bolt/Sitemap.git",
+                "reference": "604ffe47182ba5d1032cdb6fa48e86672f10c57e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bolt/Sitemap/zipball/604ffe47182ba5d1032cdb6fa48e86672f10c57e",
+                "reference": "604ffe47182ba5d1032cdb6fa48e86672f10c57e",
+                "shasum": ""
+            },
+            "require": {
+                "bolt/bolt": ">=2.0.0,<3.0.0"
+            },
+            "type": "bolt-extension",
+            "autoload": {
+                "files": [
+                    "init.php"
+                ],
+                "psr-4": {
+                    "Bolt\\Extension\\Bolt\\Sitemap\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bob den Otter",
+                    "email": "bob@twokings.nl"
+                },
+                {
+                    "name": "Patrick van Kouteren",
+                    "email": "info@wedesignit.nl"
+                }
+            ],
+            "description": "An extension to create XML sitemaps for your Bolt website.",
+            "keywords": [
+                "SEO",
+                "sitemap"
+            ],
+            "support": {
+                "source": "https://github.com/bolt/Sitemap/tree/1.0.3",
+                "issues": "https://github.com/bolt/Sitemap/issues"
+            },
+            "time": "2015-04-21 13:16:35"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": true,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

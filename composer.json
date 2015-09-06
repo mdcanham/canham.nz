@@ -1,0 +1,38 @@
+{
+    "name": "canham/matthew-canham",
+    "description": "Matthew Canham's portfolio and blog site",
+    "license": "None",
+
+    "require": {
+        "bolt/bolt": "~2.2",
+        "composer/composer": "1.0.*@dev",
+        "ircmaxell/random-lib": "dev-master"
+    },
+    "authors": [
+        {
+            "name": "Matthew Canham",
+            "email": "matt@canham.nz"
+        }
+    ],
+    "minimum-stability": "beta",
+    "prefer-stable": true,
+
+    "scripts": {
+        "bolt-update": [
+            "Bolt\\Composer\\ScriptHandler::installAssets"
+        ],
+        "post-update-cmd": [
+            "Bolt\\Composer\\ScriptHandler::installAssets"
+        ]
+    },
+    "autoload": {
+      "psr-4": { "Canham\\Canham\\": "src/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.2-dev"
+        },
+        "bolt-web-dir": "./",
+        "bolt-app-dir": "./app"
+    }
+}

@@ -1,71 +1,68 @@
-Bolt
-====
+# Matthew Canham
 
-Sophisticated, lightweight & simple CMS. Homepage: [Bolt.cm](https://bolt.cm)
+This website is running on [Bolt](http://bolt.cm).
 
-Bolt is a tool for Content Management, which strives to be as simple and
-straightforward as possible. It is quick to set up, easy to configure, uses
-elegant templates, and above all: It's a joy to use. Bolt is created using
-modern open source libraries, and is best suited to build sites in HTML5 with
-modern markup.
+If you've just downloaded this repository (not generated it), you'll need to install all of the dependencies.
 
-From a technical perspective: Bolt is written in PHP, and uses either SQLite,
-MySQL or PostgreSQL as a database. It's built upon the [Silex framework](http://silex.sensiolabs.org)
-together with a number of [Symfony](http://symfony.com/) [components](http://symfony.com/components)
-and [other libraries](http://docs.bolt.cm/credits). Bolt is released under the
-open source [MIT-license](http://opensource.org/licenses/mit-license.php).
+Make sure that you have [Node.js](https://nodejs.org/) and [Composer](https://getcomposer.org/) installed. Then you'll need to install [Gulp](http://gulpjs.org) globally, and any dependencies of the project.
 
+    npm install -g gulp
+    npm install
+    composer install
 
-Build status, code quality and other badges
--------------------------------------------
+## Theme
 
-[![Build Status](https://secure.travis-ci.org/bolt/bolt.png?branch=master)](http://travis-ci.org/bolt/bolt)
-[![Scrutinizer Continuous Inspections](https://scrutinizer-ci.com/g/bolt/bolt/badges/general.png?s=74400dd068f81fe3ba434e5952b961bb83bbea62)](https://scrutinizer-ci.com/g/bolt/bolt/)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/4d1713e3-be44-4c2e-ad92-35f65eee6bd5/mini.png)](https://insight.sensiolabs.com/projects/4d1713e3-be44-4c2e-ad92-35f65eee6bd5)
+You'll need to build the theme as well. Head over to the theme directory in `theme` and read the readme over there to figure out how to do that.
 
-For continuously inspecting our code, we use Scrutinizer CI. You can find all
-runs on our code base [here](https://scrutinizer-ci.com/g/bolt/bolt/inspections).
+## Extensions
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/bolt/bolt/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/bolt/bolt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Bolt extensions are usually third party, but having your own local one is a great place to put all of your custom PHP code. You'll probably need it at some point but the theme actually depends on it. The source code is in the `src` directory, and you can add files as you please.
 
+Out of the box, you get two functions from this extension:
 
-Installation
-------------
+1. Skip all of that boilerplate required to write your own extension.
+2. Provide two useful Twig filters/functions for your templates:
+ - An `asset` function that allows you to link to assets in your theme easily, and also links to revved versions of file names
+ - A `preg_replace` filter that allows you to use the standard PHP function in Twig.
 
-Detailed instructions can be found in the [Installation section in the documentation](http://docs.bolt.cm/installation).
+All of the Twig code is in `src/TwigHelper.php`. For adding any other code, you'd want to start with `src/Extension.php` and take it from there.
 
-Try bolt in [Ubuntu](https://manageacloud.com/cookbook/tijit2bpp3129rdctb81f1cflk/deploy#test_deployment), [CentOS](https://manageacloud.com/cookbook/nt1pf9254cg8mm1t4k0nv96jv5/deploy#test_deployment), [Debian](https://manageacloud.com/cookbook/oj5dbkcehg9h7497fjq2lagk66/deploy#test_deployment) or [Amazon Linux](https://manageacloud.com/cookbook/a382qtma5gq1928ofrsrncr70c/deploy#test_deployment).
+## Setting Up Bolt
 
-Deployable configuration examples for [Ubuntu](https://manageacloud.com/cookbook/bolt_cms_ubuntu_utopic_unicorn_1410), [CentOS](https://manageacloud.com/cookbook/bolt_cms_centos_7), [Debian](https://manageacloud.com/cookbook/bolt_cms) and  [Amazon Linux](https://manageacloud.com/cookbook/bolt_cms_amazon_2014032)
+Set up your Apache webserver to point towards the web directory, and then navigate to it. You'll be prompted to set up your first user - do it and then the website is ready to go! Need more information? Go to [the Bolt Docs](http://docs.bolt.cm).
 
-Reporting issues
-----------------
-When you run into an issue, be sure to provide some details on the issue.
-Please include with your report:
-- the (example) input;
-- the output you expected;
-- the output actually produced.
+You'll probably want to install the third party extensions that we've included. In Bolt, head to the "Extend" panel on the right and then click "Install All Extensions".
 
-This way we can reproduce your issue, turn it into a test and prevent the issue
-from occurring in future versions.
+## Deploying
 
-Unit tests
-----------
-For running unit tests you need [phpunit](http://www.phpunit.de/).
+This has a gulpfile that is ready to deploy your website via FTP. Want to use a different deployment method? How secure! You'll have to modify the current setup, check gulpfile.js for how the internals work.
 
-After installing, you can run the unit test suite by running:
+There are two methods of deployment, deploying just the theme (because you'll probably do that most), and deploying the entire application.
 
-    $ phpunit
+There is a `.env` file here that you will need to edit to configure the credentials for FTP. It's not commited to Git, so it won't end up online or anything (which is good).
 
-This can now also be done by using app/nut:
+### Theme Deployment
 
-    $ php app/nut tests:run
+Make sure the theme has been built with the `--dist` flag (see the theme readme), and then just run the following command in this folder.
 
-Extensions and Themes
----------------------
-Since Bolt 2.0, you can install extensions and themes directly from Bolt's
-interface. To browse the available extensions and themes, visit
-[extensions.bolt.cm](https://extensions.bolt.cm).
+    gulp deploy:theme
 
--------
+This deployment script is optimised so that only changed files will be uploaded, for maximum speed.
+
+### App Deployment
+
+With all of its dependencies, there are a lot of files to deploy if you're deploying the entire application. There is a gulp task that will create an optimised version of the website, and then bundle it up in a zip file, ready to be uploaded. Once its uploaded, you'll have to use another tool to unzip it. Execute the following command in this folder.
+
+    gulp bundle
+
+You'll end up with a `dist` folder, and inside it will be the optimised application and a `canham-bundle.zip`. You can use your favourite FTP application to upload this, or you can use the gulp task.
+
+    gulp deploy:app
+
+Following this, the file will need to be unzipped on the server side. If you're using a host with cPanel, its file manager usually has an unzip function. If you don't have access to it, you can very quickly upload the following script as `unzip.php`, and then execute it.
+
+    <?php system('unzip -o canham-bundle.zip');
+
+Make sure to delete this afterwards! The zip file will be hidden by your htaccess file, but it's best to delete that off the server as well.
+
+If you haven't already, you'll need to put your database details in `app/config/config_local.yml` on the server side. And also set up Bolt like you have on this side.
